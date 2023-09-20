@@ -18,7 +18,7 @@ import java.util.function.Function;
 public class JwtService {
 
     private static final String SECRET_KEY = "14b8b0acee3bd31cd8d3bb141cd6f1921fec7adfa77e28164f0ab8db172eada8";
-    //secret key should be secured
+    //btw. secret key should be stored in a secure place
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
