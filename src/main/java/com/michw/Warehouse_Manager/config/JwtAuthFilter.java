@@ -1,6 +1,5 @@
 package com.michw.Warehouse_Manager.config;
 
-import com.michw.Warehouse_Manager.service.AuthService;
 import com.michw.Warehouse_Manager.service.JwtService;
 import com.michw.Warehouse_Manager.service.UserService;
 import jakarta.servlet.FilterChain;

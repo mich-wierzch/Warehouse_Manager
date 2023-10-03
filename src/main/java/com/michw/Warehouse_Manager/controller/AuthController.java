@@ -1,7 +1,6 @@
 package com.michw.Warehouse_Manager.controller;
 
 import com.michw.Warehouse_Manager.dto.AuthRequest;
-import com.michw.Warehouse_Manager.dto.AuthResponse;
 import com.michw.Warehouse_Manager.dto.RegisterRequest;
 import com.michw.Warehouse_Manager.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +18,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
-        return ResponseEntity.ok(authService.register(request));
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request){
+        return authService.register(request);
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest request){
-        return ResponseEntity.ok(authService.authenticate(request));
+    public ResponseEntity<String> authenticate(@RequestBody AuthRequest request){
+        return authService.authenticate(request);
 
     }
 

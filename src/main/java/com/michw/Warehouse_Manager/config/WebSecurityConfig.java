@@ -1,6 +1,5 @@
 package com.michw.Warehouse_Manager.config;
 
-import com.michw.Warehouse_Manager.service.AuthService;
 import com.michw.Warehouse_Manager.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +23,12 @@ public class WebSecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final UserService userService;
 
+    static final String[] authWhiteList = {
+            "/api/v1/auth/**",
+            "/swagger-ui/**",
+            "v3/api-docs/**"
+    };
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -31,7 +36,7 @@ public class WebSecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**")
+                .requestMatchers(authWhiteList)
                 .permitAll()
                 .anyRequest()
                 .authenticated()

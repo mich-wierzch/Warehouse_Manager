@@ -14,7 +14,10 @@ import java.util.List;
 @Data
 @Entity
 @Table(
-        name="Users"
+        name="Users",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "email_unique", columnNames = "email")
+        }
 )
 @AllArgsConstructor
 @NoArgsConstructor
