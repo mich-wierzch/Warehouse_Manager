@@ -23,4 +23,15 @@ public class ProductController {
         return productService.add(productRequest);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> removeProduct(@PathVariable Long id){
+        return productService.remove(id);
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable Long id, ProductDto request){
+        return productService.update(id, request);
+    }
+
 }
