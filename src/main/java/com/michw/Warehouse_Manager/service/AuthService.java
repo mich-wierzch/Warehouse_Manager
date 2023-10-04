@@ -1,7 +1,6 @@
 package com.michw.Warehouse_Manager.service;
 
 import com.michw.Warehouse_Manager.dto.AuthRequest;
-
 import com.michw.Warehouse_Manager.dto.RegisterRequest;
 import com.michw.Warehouse_Manager.entity.Role;
 import com.michw.Warehouse_Manager.entity.User;
@@ -17,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +36,7 @@ public class AuthService {
                     .lastName(request.getLastName())
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
-                    .role(Role.ADMIN)
+                    .role(Role.USER)
                     .build();
             userRepository.save(user);
             var jwtToken = jwtService.generateToken(user);
