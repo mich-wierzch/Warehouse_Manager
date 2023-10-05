@@ -4,6 +4,7 @@ import com.michw.Warehouse_Manager.dto.ProductDto;
 import com.michw.Warehouse_Manager.entity.Product;
 import com.michw.Warehouse_Manager.exceptions.DuplicateProductException;
 import com.michw.Warehouse_Manager.repository.ProductRepository;
+import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +43,14 @@ public class ProductService {
     }
 
     public ResponseEntity<String> remove(Long id){
-        productRepository.deleteById(id);
-        return ResponseEntity.ok("Product deleted");
+        try {
+            var product = productRepository.findById(id)
+                    .orElseThrow(() -> new NullPointerException("No post with id " + id + " found"));
+            productRepository.deleteById(id);
+            return ResponseEntity.ok("Product deleted");
+        } catch (NullPointerException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     public ResponseEntity<String> update(Long id, ProductDto request){
