@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -15,12 +16,12 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     @GetMapping
-    public List<Product> getProducts(){
+    public List<ProductDto> getProducts(){
         return productService.findAll();
     }
     @PostMapping
-    public ResponseEntity<String> addProduct(@RequestBody ProductDto productRequest){
-        return productService.add(productRequest);
+    public ResponseEntity<String> addProduct(@RequestBody ProductDto productRequest, Principal principal){
+        return productService.add(productRequest, principal);
     }
 
     @DeleteMapping("/{id}")

@@ -29,4 +29,10 @@ public class Product {
     private String name;
     private Long quantity;
     private String category;
+    @ManyToOne
+    @JoinColumn(
+            name="user_id",
+            referencedColumnName = "id"
+    )
+    private User user;
 }
