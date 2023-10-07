@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.security.Principal;
 import java.util.Collections;
 
 import static org.mockito.Mockito.*;
@@ -63,7 +64,7 @@ public class ProductControllerTest {
                 .category("TestCategory")
                 .build();
 
-        when(productService.add(any(ProductDto.class))).thenReturn(ResponseEntity.ok("Product added successfully"));
+        when(productService.add(any(ProductDto.class), any(Principal.class))).thenReturn(ResponseEntity.ok("Product added successfully"));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/products")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -71,7 +72,7 @@ public class ProductControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("Product added successfully"));
 
-        verify(productService, times(1)).add(any(ProductDto.class));
+        verify(productService, times(1)).add(any(ProductDto.class), any(Principal.class));
         verifyNoMoreInteractions(productService);
     }
 
